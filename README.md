@@ -41,38 +41,38 @@ components.send(channel: discord.abc.Messageable, content=None, *, tts=False, em
                 allowed_mentions=None, reference=None,
                 mention_author=None, components=[])
 ```
-`channnel`: Channel to send the message.
-`content`..`mention_author`: Same as `discord.abc.Messageable.send`.
-`components`: Components to attach to the message.
-If you want to use multi row components, please specify 2D list.
+`channnel`: Channel to send the message.  
+`content`..`mention_author`: Same as `discord.abc.Messageable.send`.  
+`components`: Components to attach to the message.  
+If you want to use multi row components, please specify 2D list.  
 #### `components.Button`
-Represents a button in component.
-`label`: Label for the button.
-`custom_id`|`name`: Custom id for the button.
-`url`: URL for the button.
-`style`: Style for the button.
-Pass values of [Button Styles](https://discord.com/developers/docs/interactions/message-components#buttons-button-styles).
-`emoji`: Emoji for the button.
-`enabled`: Whether the button is enabled.
+Represents a button in component.  
+`label`: Label for the button.  
+`custom_id`|`name`: Custom id for the button.  
+`url`: URL for the button.  
+`style`: Style for the button.  
+Pass values of [Button Styles](https://discord.com/developers/docs/interactions/message-components#buttons-button-styles).  
+`emoji`: Emoji for the button.  
+`enabled`: Whether the button is enabled.  
 ##### Properties
-`.disabled`: Same as `not self.enabled`.
+`.disabled`: Same as `not self.enabled`.  
 ### `on_button_click(cmp: ButtonResponse)`
-Fires when user clicked button.
+Fires when user clicked button.  
 ## ButtonResponse
-Represents a button response.
-Do not initialize this class directly.
-`id`: ID of the interaction.
-`application_id`: Application ID of the interaction.
-`guild`: Guild of the interaction.
-`channel`: Channel of the interaction.
-`message`: Message of the interaction.
-`member`: Member who pressed the button.
-`token`: Token of the interaction.
-`custom_id`|`name`: Custom ID of the button.
+Represents a button response.  
+Do not initialize this class directly.  
+`id`: ID of the interaction.  
+`application_id`: Application ID of the interaction.  
+`guild`: Guild of the interaction.  
+`channel`: Channel of the interaction.  
+`message`: Message of the interaction.  
+`member`: Member who pressed the button.  
+`token`: Token of the interaction.  
+`custom_id`|`name`: Custom ID of the button.  
 
 #### `ButtonResponse.send`
-This function is a coroutine.
-Responds interaction.
+This function is a coroutine.  
+Responds interaction.  
 ```python
 ButtonResponse.send(
     content=None, *,
@@ -83,13 +83,13 @@ ButtonResponse.send(
     hidden=False
 )
 ```
-`content`...`tts`: Same as `discord.abc.Messageable.send`.
-`hidden`: Hide the message or not.
+`content`...`tts`: Same as `discord.abc.Messageable.send`.  
+`hidden`: Hide the message or not.  
 #### `ButtonResponse.defer_source`
-This function is a coroutine.
-ACK an interaction with DeferredChannelMessageWithSource(5).
-The user sees a loading state.
+This function is a coroutine.  
+ACK an interaction with DeferredChannelMessageWithSource(5).  
+The user sees a loading state.  
 #### `ButtonResponse.defer_update`
-This function is a coroutine.
-ACK an interaction with DeferredUpdateMessage(6).
-The user doesn't see a loading state.
+This function is a coroutine.  
+ACK an interaction with DeferredUpdateMessage(6).  
+The user doesn't see a loading state.  
