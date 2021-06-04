@@ -45,6 +45,13 @@ components.send(channel: discord.abc.Messageable, content=None, *, tts=False, em
 `content`..`mention_author`: Same as `discord.abc.Messageable.send`.  
 `components`: Components to attach to the message.  
 If you want to use multi row components, please specify 2D list.  
+#### `components.reply`|`components.sender.reply`
+This function is a coroutine.  
+An utility function for replying message.  
+Same as:
+```py
+await send(target.channel, *args, reference=target.to_reference(), **kwargs)
+```
 #### `components.Button`
 Represents a button in component.  
 `label`: Label for the button.  

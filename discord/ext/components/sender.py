@@ -252,3 +252,7 @@ async def edit(message, **fields):
 
     if delete_after is not None:
         await message.delete(delay=delete_after)
+
+
+async def reply(target, *args, **kwargs):
+    await send(target.channel, *args, reference=target.to_reference(), **kwargs)
