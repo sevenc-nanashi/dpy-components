@@ -1,4 +1,4 @@
-from .sender import send, edit, Button  # noqa
+from .sender import send, edit, reply, Button  # noqa
 from .receiver import ComponentCog  # noqa
 from .responder import ButtonResponse  # noqa
 
