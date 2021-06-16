@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from enum import Enum
 from typing import Union
 
 import discord
@@ -9,20 +10,50 @@ from discord.errors import InvalidArgument
 from discord.http import Route
 
 
+def _convert_style(style):
+    if isinstance(style, int):
+        if not 1 <= style <= 5:
+            raise TypeError("style should be in 1 to 5.")
+        return style
+    elif isinstance(ButtonType, int):
+        return style.value
+    else:
+        raise TypeError("style should be int or ButtonType.")
+
+
+class ButtonType(Enum):
+    primary = 1
+    primary_cta = 1
+    primary_success = 2
+    success = 2
+    secondary = 3
+    danger = 4
+    destructive = 4
+    link = 5
+    url = 5
+
+    blue = 1
+    blurple = 1
+    green = 2
+    gray = 3
+    glay = 3
+    red = 4
+
+
 @dataclass
 class Button:
     label: str
-    name: str = None
     custom_id: str = None
-    style: int = 1
+    style: int = Union[int, ButtonType]
     url: str = None
     emoji: Union[Emoji, str] = None
     enabled: bool = True
+    name: str = None
 
     def to_dict(self):
         res = {
             "type": 2,
-            "style": self.style,
+            "style": _convert_style(self.style),
             "label": self.label,
             "disabled": not self.enabled
         }
