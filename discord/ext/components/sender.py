@@ -24,8 +24,8 @@ def _convert_style(style):
 class ButtonType(Enum):
     primary = 1
     primary_cta = 1
-    primary_success = 2
     success = 2
+    primary_success = 2
     secondary = 3
     danger = 4
     destructive = 4
@@ -36,7 +36,7 @@ class ButtonType(Enum):
     blurple = 1
     green = 2
     gray = 3
-    glay = 3
+    grey = 3
     red = 4
 
 
