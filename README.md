@@ -32,7 +32,19 @@ bot.run(os.getenv("token"))
 
 Reference
 =========
-#### `components.send`|`components.sender.send`
+### `ButtonType`
+Represents button type.
+#### `primary`,`primary_cta`,`blue`,`blurple`
+Represents `1`.
+#### `success`,`primary_success`,`green`
+Represents `2`.
+#### `secondary`,`gray`,`grey`
+Represents `3`.
+### `danger`,`destructive`,`red`
+Represents `4`.
+### `link`,`url`
+Represents `5`.
+#### `components.send`
 This function is a coroutine.
 Send message with components.
 ```python
@@ -45,7 +57,7 @@ components.send(channel: discord.abc.Messageable, content=None, *, tts=False, em
 `content`..`mention_author`: Same as `discord.abc.Messageable.send`.  
 `components`: Components to attach to the message.  
 If you want to use multi row components, please specify 2D list.  
-#### `components.reply`|`components.sender.reply`
+#### `components.reply`
 This function is a coroutine.  
 An utility function for replying message.  
 Same as:
@@ -58,7 +70,7 @@ Represents a button in component.
 `custom_id`|`name`: Custom id for the button.  
 `url`: URL for the button.  
 `style`: Style for the button.  
-Pass values of [Button Styles](https://discord.com/developers/docs/interactions/message-components#buttons-button-styles).  
+Pass values of [Button Styles](https://discord.com/developers/docs/interactions/message-components#buttons-button-styles), or `ButtonType`.  
 `emoji`: Emoji for the button.  
 `enabled`: Whether the button is enabled.  
 ##### Properties
