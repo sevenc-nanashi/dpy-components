@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
-from typing import Union
+from typing import Optional, Union
 
 import discord
 from discord import File, AllowedMentions
@@ -22,6 +22,7 @@ def _convert_style(style):
 
 
 class ButtonType(Enum):
+    """Represents button type."""
     primary = 1
     primary_cta = 1
     success = 2
@@ -42,10 +43,25 @@ class ButtonType(Enum):
 
 @dataclass
 class Button:
+    """Represents a button in component.
+
+    Properties
+    ==========
+    label : str
+        Label for the button.
+    custom_id : Optional[str]
+        Custom id for the button.
+    url : Optional[str]
+        URL for the button.
+    emoji : Union[Emoji, str]
+        Emoji for the button.
+    enabled : bool
+        Weather button is enabled or disabled.
+    """
     label: str
-    custom_id: str = None
+    custom_id: Optional[str] = None
     style: int = Union[int, ButtonType]
-    url: str = None
+    url: Optional[str] = None
     emoji: Union[Emoji, str] = None
     enabled: bool = True
     name: str = None
@@ -115,7 +131,23 @@ async def send(channel, content=None, *, tts=False, embed=None, file=None,
                files=None, delete_after=None, nonce=None,
                allowed_mentions=None, reference=None,
                mention_author=None, components=[]):
+    """Send message with components.
 
+    Parameters
+    ----------
+    channel : discord.abc.Messageable
+        Channel to send the message.
+    content..mention_author
+        Same as `discord.abc.Messageable.send`.
+    components : list, optional
+        Components to attach to the message.
+        Specify 2D list if you want to use multi row components.
+
+    Returns
+    -------
+    Message
+        Message was sent.
+    """
     channel = await channel._get_channel()
     state = channel._state
     components2 = []
@@ -286,4 +318,5 @@ async def edit(message, **fields):
 
 
 async def reply(target, *args, **kwargs):
+    """An utility function for replying message."""
     await send(target.channel, *args, reference=target.to_reference(), **kwargs)

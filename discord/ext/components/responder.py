@@ -3,6 +3,11 @@ from discord.http import Route
 
 
 class ButtonResponse():
+    """
+    Represents a button response.
+    Do not initialize this class directly.
+    """
+
     def __init__(self, bot, data, state):
         self.bot = bot
         self.state = state
@@ -27,6 +32,15 @@ class ButtonResponse():
         self.sent_callback = False
 
     async def defer_source(self, hidden=False):
+        """
+        ACK an interaction with DeferredChannelMessageWithSource(5).
+        The user sees a loading state.
+
+        Parameter
+        ---------
+        hidden : bool
+            Hide interaction response or not.
+        """
         if self.defered:
             raise "Already defered."
         r = Route('POST', '/interactions/{interaction_id}/{interaction_token}/callback', interaction_id=self.id, interaction_token=self.token)
@@ -34,6 +48,15 @@ class ButtonResponse():
         await self.bot.http.request(r, json={"type": 5, "data": {"flags": 64 if hidden else 0}})
 
     async def defer_update(self):
+        """
+        ACK an interaction with DeferredUpdateMessage(6).
+        The user doesn't see a loading state.
+
+        Parameter
+        ---------
+        hidden : bool
+            Hide interaction response or not.
+        """
         if self.defered:
             raise "Already defered."
         r = Route('POST', '/interactions/{interaction_id}/{interaction_token}/callback', interaction_id=self.id, interaction_token=self.token)
@@ -41,7 +64,15 @@ class ButtonResponse():
         await self.bot.http.request(r, json={"type": 6})
 
     async def send(self, content=None, *, embed=None, embeds=[], allowed_mentions=None, hidden=False, tts=False):
+        """Responds interaction.
 
+        Parameters
+        ----------
+        content...tts
+            Same as `discord.abc.Messageable.send`.
+        hidden : bool
+            Hide the message or not.
+        """
         state = self.state
         content = str(content) if content is not None else None
         if embed is not None:
