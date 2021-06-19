@@ -25,9 +25,9 @@ class ButtonType(Enum):
     """Represents button type."""
     primary = 1
     primary_cta = 1
-    success = 2
-    primary_success = 2
-    secondary = 3
+    secondary = 2
+    success = 3
+    primary_success = 3
     danger = 4
     destructive = 4
     link = 5
@@ -35,9 +35,9 @@ class ButtonType(Enum):
 
     blue = 1
     blurple = 1
-    green = 2
-    gray = 3
-    grey = 3
+    gray = 2
+    grey = 2
+    green = 3
     red = 4
 
 
