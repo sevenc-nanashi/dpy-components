@@ -15,7 +15,7 @@ def _convert_style(style):
         if not 1 <= style <= 5:
             raise TypeError("style should be in 1 to 5.")
         return style
-    elif isinstance(ButtonType, int):
+    elif isinstance(style, ButtonType):
         return style.value
     else:
         raise TypeError("style should be int or ButtonType.")
@@ -51,6 +51,8 @@ class Button:
         Label for the button.
     custom_id : Optional[str]
         Custom id for the button.
+    style : Union[int, ButtonType]
+        Style for the button.
     url : Optional[str]
         URL for the button.
     emoji : Union[Emoji, str]
@@ -60,7 +62,7 @@ class Button:
     """
     label: str
     custom_id: Optional[str] = None
-    style: int = Union[int, ButtonType]
+    style: Union[int, ButtonType] = ButtonType.blurple
     url: Optional[str] = None
     emoji: Union[Emoji, str] = None
     enabled: bool = True
