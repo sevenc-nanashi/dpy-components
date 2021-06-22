@@ -18,7 +18,10 @@ class ButtonResponse():
         data = self.data
         self.id = int(data["id"])
         self.application_id = int(data["application_id"])
-        self.guild = bot.get_guild(int(data["guild_id"]))
+        if data.get("guild_id") is None:
+            self.guild = None
+        else:
+            self.guild = bot.get_guild(int(data["guild_id"]))
         self.channel = bot.get_channel(int(data["channel_id"]))
         self.member = discord.Member(state=bot._get_state(), guild=self.guild, data=data["member"])
         if data["message"]["flags"] == 64:
