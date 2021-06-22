@@ -1,6 +1,6 @@
 # dpy-components
-[![PyPI](https://img.shields.io/pypi/v/discord-emoji)](https://pypi.org/project/discord-emoji) 
-[![PyPI - Downloads](https://img.shields.io/badge/dynamic/json?label=downloads&query=%24.total_downloads&url=https%3A%2F%2Fapi.pepy.tech%2Fapi%2Fprojects%2Fdiscord-emoji)](https://pepy.tech/project/discord-emoji/) 
+[![PyPI](https://img.shields.io/pypi/v/dpy-components)](https://pypi.org/project/discord-emoji) 
+[![PyPI - Downloads](https://img.shields.io/badge/dynamic/json?label=downloads&query=%24.total_downloads&url=https%3A%2F%2Fapi.pepy.tech%2Fapi%2Fprojects%2Fdiscord-emoji)](https://pepy.tech/project/dpy-components/) 
 [![Documentation Status](https://readthedocs.org/projects/dpy-components/badge/?version=latest)](https://dpy-components-ja.readthedocs.io/en/latest/?badge=latest)  
 This lib adds components support for discord.py.  
 Please note this is beta yet.
