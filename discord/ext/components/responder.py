@@ -20,7 +20,7 @@ class ButtonResponse():
         self.application_id = int(data["application_id"])
         if data.get("guild_id") is None:
             self.guild = None
-            self.user = discord.User(state=bot._get_state(), guild=self.guild, data=data["user"])
+            self.user = discord.User(state=bot._get_state(), data=data["user"])
             self.member = None
         else:
             self.guild = bot.get_guild(int(data["guild_id"]))
