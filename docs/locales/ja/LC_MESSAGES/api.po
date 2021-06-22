@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, sevenc-nanashi
+# This file is distributed under the same license as the dpy-components
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: dpy-components \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-22 18:26+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../api.rst:2
+msgid "API documentation"
+msgstr "APIドキュメント"
+
+#: ../../api.rst:5
+msgid "Receive components' event"
+msgstr "コンポーネントのイベントを受け取る"
+
+#: ../../api.rst:8
+msgid ""
+"A cog that receive and handles components' event. You can load this cog "
+"as extension with:"
+msgstr "コンポーネントのイベントを受け取り、ハンドルするコグ。エクステンションとして読み込むには以下のようにして下さい："
+
+#: ../../api.rst:16
+msgid "events"
+msgstr "イベント"
+
+#: ../../api.rst:20
+msgid "Fires when user clicked button."
+msgstr "ボタンをクリックしたときに発火するイベント。"
+
+#: ../../api.rst components.responder.ButtonResponse.defer_source
+#: components.responder.ButtonResponse.defer_update
+#: components.responder.ButtonResponse.send components.sender.send of
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: ../../api.rst:22
+msgid "A response."
+msgstr "Gatewayからのレスポンス。"
+
+#: ../../api.rst:26
+msgid "Respond components' event"
+msgstr "コンポーネントのイベントに応答する"
+
+#: components.responder.ButtonResponse:1 of
+msgid "Represents a button response. Do not initialize this class directly."
+msgstr "ボタンのイベントです。このクラスを直接初期化しないで下さい。"
+
+#: components.responder.ButtonResponse.defer_source:1 of
+msgid ""
+"ACK an interaction with DeferredChannelMessageWithSource(5). The user "
+"sees a loading state."
+msgstr "DeferredChannelMessageWithSource(5)で応答します。``○○が考え中...``が表示されます。"
+
+#: components.responder.ButtonResponse.defer_source:4
+#: components.responder.ButtonResponse.defer_update:4 of
+msgid "Hide interaction response or not."
+msgstr "応答を隠すかどうか。"
+
+#: components.responder.ButtonResponse.defer_update:1 of
+msgid ""
+"ACK an interaction with DeferredUpdateMessage(6). The user doesn't see a "
+"loading state."
+msgstr "DeferredUpdateMessage(6)で応答します。``○○が考え中...``は表示されません。"
+
+#: components.responder.ButtonResponse.send:1 of
+msgid "Responds interaction."
+msgstr "インタラクションに反応します。"
+
+#: components.responder.ButtonResponse.send:3 components.sender.send:5 of
+msgid "Same as ``discord.abc.Messageable.send``."
+msgstr "``discord.abc.Messageable.send``と同じです。"
+
+#: components.responder.ButtonResponse.send:4 of
+msgid "Hide the message or not."
+msgstr "メッセージを隠すかどうか。"
+
+#: ../../api.rst:31
+msgid "Send messages with components"
+msgstr "メッセージをコンポーネント付きで送信します。"
+
+#: components.sender.send:1 of
+msgid "Send message with components."
+msgstr "メッセージをコンポーネント付きで送信します。"
+
+#: components.sender.send:3 of
+msgid "Channel to send the message."
+msgstr "メッセージを送信するチャンネル。"
+
+#: components.sender.send:6 of
+msgid ""
+"Components to attach to the message. Specify 2D list if you want to use "
+"multi row components."
+msgstr "メッセージに追加するコンポーネント。複数行にしたい場合は2次元配列を指定して下さい。"
+
+#: components.sender.send of
+msgid "Returns"
+msgstr "返り値"
+
+#: components.sender.send:10 of
+msgid "Message was sent."
+msgstr "送信したメッセージ。"
+
+#: components.sender.send of
+msgid "Return type"
+msgstr "戻り値の型"
+
+#: components.sender.reply:1 of
+msgid "An utility function for replying message."
+msgstr "メッセージへ返信する為の関数。"
+
