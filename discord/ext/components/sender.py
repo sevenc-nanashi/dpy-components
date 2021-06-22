@@ -169,8 +169,8 @@ async def send(channel, content=None, *, tts=False, embed=None, embeds=None, fil
         raise InvalidArgument('cannot pass both embed and embeds parameter to send()')
     if embed is not None:
         embeds = [embed]
-
-    embeds = list(map(lambda e: e.to_dict(), embeds))
+    if embeds is not None:
+        embeds = list(map(lambda e: e.to_dict(), embeds))
 
     if allowed_mentions is not None:
         if state.allowed_mentions is not None:
