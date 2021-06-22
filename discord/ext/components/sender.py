@@ -91,15 +91,15 @@ class Button:
         return res
 
 
-async def _send_files(self, channel_id, *, files, content=None, tts=False, embed=None, nonce=None, allowed_mentions=None, message_reference=None, components=None):
+async def _send_files(self, channel_id, *, files, content=None, tts=False, embeds=None, nonce=None, allowed_mentions=None, message_reference=None, components=None):
     r = Route('POST', '/channels/{channel_id}/messages', channel_id=channel_id)
     form = []
 
     payload = {'tts': tts}
     if content:
         payload['content'] = content
-    if embed:
-        payload['embed'] = embed
+    if embeds:
+        payload['embed'] = embeds
     if nonce:
         payload['nonce'] = nonce
     if allowed_mentions:
@@ -129,7 +129,7 @@ async def _send_files(self, channel_id, *, files, content=None, tts=False, embed
     return self.request(r, form=form, files=files)
 
 
-async def send(channel, content=None, *, tts=False, embed=None, file=None,
+async def send(channel, content=None, *, tts=False, embed=None, embeds=None, file=None,
                files=None, delete_after=None, nonce=None,
                allowed_mentions=None, reference=None,
                mention_author=None, components=[]):
@@ -165,8 +165,12 @@ async def send(channel, content=None, *, tts=False, embed=None, file=None,
             "components": list(map(lambda b: b.to_dict(), components)),
         }]
     content = str(content) if content is not None else None
+    if embed is not None and embeds is not None:
+        raise InvalidArgument('cannot pass both embed and embeds parameter to send()')
     if embed is not None:
-        embed = embed.to_dict()
+        embeds = [embed]
+
+    embeds = list(map(lambda e: e.to_dict(), embeds))
 
     if allowed_mentions is not None:
         if state.allowed_mentions is not None:
@@ -195,7 +199,7 @@ async def send(channel, content=None, *, tts=False, embed=None, file=None,
 
         try:
             data = await _send_files(channel.id, files=[file], allowed_mentions=allowed_mentions,
-                                     content=content, tts=tts, embed=embed, nonce=nonce,
+                                     content=content, tts=tts, embeds=embeds, nonce=nonce,
                                      message_reference=reference, components=components2)
         finally:
             file.close()
@@ -208,7 +212,7 @@ async def send(channel, content=None, *, tts=False, embed=None, file=None,
 
         try:
             data = await _send_files(channel.id, files=files, content=content, tts=tts,
-                                     embed=embed, nonce=nonce, allowed_mentions=allowed_mentions,
+                                     embeds=embeds, nonce=nonce, allowed_mentions=allowed_mentions,
                                      message_reference=reference, components=components2)
         finally:
             for f in files:
@@ -223,8 +227,8 @@ async def send(channel, content=None, *, tts=False, embed=None, file=None,
         if tts:
             payload['tts'] = True
 
-        if embed:
-            payload['embed'] = embed
+        if embeds:
+            payload['embeds'] = embeds
 
         if nonce:
             payload['nonce'] = nonce
