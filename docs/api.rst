@@ -23,12 +23,12 @@ events
    :type com: :class:`components.ButtonResponse`
 
 Respond components' event
-------------------------
+-------------------------
 .. autoclass:: components.ButtonResponse
    :members:
 
 Send messages with components
----------------
+-----------------------------
 .. autofunction:: components.send
 
 .. autofunction:: components.reply
