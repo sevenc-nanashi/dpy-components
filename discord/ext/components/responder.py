@@ -20,10 +20,14 @@ class ButtonResponse():
         self.application_id = int(data["application_id"])
         if data.get("guild_id") is None:
             self.guild = None
+            self.user = discord.User(state=bot._get_state(), guild=self.guild, data=data["user"])
+            self.member = None
         else:
             self.guild = bot.get_guild(int(data["guild_id"]))
+            self.member = discord.Member(state=bot._get_state(), guild=self.guild, data=data["member"])
+            self.user = None
         self.channel = bot.get_channel(int(data["channel_id"]))
-        self.member = discord.Member(state=bot._get_state(), guild=self.guild, data=data["member"])
+
         if data["message"]["flags"] == 64:
             self.message = await self.channel.fetch_message(int(data["message"]["id"]))
         else:
@@ -33,6 +37,11 @@ class ButtonResponse():
         self.name = data["data"]["custom_id"]
         self.defered = False
         self.sent_callback = False
+
+    @property
+    def fired_by(self):
+        """Return ``self.member`` or ``self.user``."""
+        return self.member or self.user
 
     async def defer_source(self, hidden=False):
         """
