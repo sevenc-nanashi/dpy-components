@@ -45,8 +45,8 @@ class ButtonType(Enum):
 class Button:
     """Represents a button in component.
 
-    Properties
-    ==========
+    Parameters
+    ----------
     label : str
         Label for the button.
     custom_id : Optional[str]

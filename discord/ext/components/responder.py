@@ -39,8 +39,8 @@ class ButtonResponse():
         ACK an interaction with DeferredChannelMessageWithSource(5).
         The user sees a loading state.
 
-        Parameter
-        ---------
+        Parameters
+        ----------
         hidden : bool
             Hide interaction response or not.
         """
@@ -55,8 +55,8 @@ class ButtonResponse():
         ACK an interaction with DeferredUpdateMessage(6).
         The user doesn't see a loading state.
 
-        Parameter
-        ---------
+        Parameters
+        ----------
         hidden : bool
             Hide interaction response or not.
         """
