@@ -140,7 +140,7 @@ async def send(channel, content=None, *, tts=False, embed=None, embeds=None, fil
     channel : discord.abc.Messageable
         Channel to send the message.
     content..mention_author
-        Same as `discord.abc.Messageable.send`.
+        Same as ``discord.abc.Messageable.send``.
     components : list, optional
         Components to attach to the message.
         Specify 2D list if you want to use multi row components.

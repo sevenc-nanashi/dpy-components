@@ -72,7 +72,7 @@ class ButtonResponse():
         Parameters
         ----------
         content...tts
-            Same as `discord.abc.Messageable.send`.
+            Same as ``discord.abc.Messageable.send``.
         hidden : bool
             Hide the message or not.
         """
