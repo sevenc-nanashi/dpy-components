@@ -153,7 +153,7 @@ async def send(channel, content=None, *, tts=False, embed=None, embeds=None, fil
     channel = await channel._get_channel()
     state = channel._state
     components2 = []
-    if components is None:
+    if not components:
         pass
     elif isinstance(components[0], list):
         components2 = [{
