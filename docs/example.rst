@@ -68,7 +68,7 @@ Pagenation with select menu
 ---------------------------
 
 .. code-block:: python
-    
+
     import asyncio
     import os
 
@@ -77,7 +77,6 @@ Pagenation with select menu
     from discord.ext import components
     bot = commands.Bot("c ")
     bot.load_extension("discord.ext.components")
-    bot.load_extension("jishaku")
 
     pages = [
         "Done is better than perfect.\n\n--Mark Zuckerberg",
