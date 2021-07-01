@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional, Union
+from typing import Optional, Union, List
 
 import discord
 from discord import File, AllowedMentions
@@ -19,6 +19,19 @@ def _convert_style(style):
         return style.value
     else:
         raise TypeError("style should be int or ButtonType.")
+
+
+def _convert_components(components):
+    listed_components = []
+    for component in components:
+        if isinstance(component, list):
+            listed_components.append({"type": 1, "components": component})
+        else:
+            listed_components.append({"type": 1, "components": [component]})
+    for component in listed_components:
+        component["components"] = list(map(lambda c: c.to_dict(), component["components"]))
+
+    return listed_components
 
 
 class ButtonType(Enum):
@@ -91,6 +104,86 @@ class Button:
         return res
 
 
+@dataclass
+class SelectOption:
+    """Represents a option for the select menu.
+
+    Parameters
+    ----------
+    label : str
+        Label for the option.
+    value : str
+        Value for the option.
+    description : Optional[str]
+        Description for the option.
+    emoji : Union[Emoji, str]
+        Emoji for the option.
+    default : bool
+        Weather option is default.
+    """
+    label: str
+    value: str
+    description: Optional[str] = None
+    emoji: Union[Emoji, str] = None
+    default: bool = False
+
+    def to_dict(self):
+        res = {
+            "label": self.label,
+            "value": self.value,
+            "description": self.description,
+            "default": self.default
+        }
+        if self.emoji:
+            if isinstance(self.emoji, str):
+                res["emoji"] = {
+                    "name": self.emoji,
+                    "id": None
+                }
+            else:
+                res["emoji"] = {
+                    "name": self.emoji.name,
+                    "id": self.emoji.id,
+                }
+
+        return res
+
+
+@dataclass
+class SelectMenu:
+    """Represents a select menu in component.
+
+    Parameters
+    ----------
+    custom_id : Optional[str]
+        Custom id for the select menu.
+    options : List[SelectOption]
+        Options for the select menu.
+    placeholder : Optional[str]
+        Placeholder for the select menu.
+    min_values : int
+        Minimum number of items that must be chosen.
+    max_values: int
+        Maximum number of items that must be chosen.
+    """
+    custom_id: Optional[str]
+    options: List[SelectOption]
+    placeholder: Optional[str]
+    min_values: int = 1
+    max_values: int = 1
+
+    def to_dict(self):
+        res = {
+            "type": 3,
+            "custom_id": self.custom_id,
+            "options": [o.to_dict() for o in self.options],
+            "placeholder": self.placeholder,
+            "min_values": self.min_values,
+            "max_values": self.max_values
+        }
+        return res
+
+
 async def _send_files(self, channel_id, *, files, content=None, tts=False, embeds=None, nonce=None, allowed_mentions=None, message_reference=None, components=None):
     r = Route('POST', '/channels/{channel_id}/messages', channel_id=channel_id)
     form = []
@@ -155,17 +248,8 @@ async def send(channel, content=None, *, tts=False, embed=None, embeds=None, fil
     components2 = []
     if not components:
         pass
-    elif isinstance(components[0], list):
-        components2 = [{
-            "type": 1,
-            "components": list(map(lambda b: b.to_dict(), c)),
-        }
-            for c in components]
     else:
-        components2 = [{
-            "type": 1,
-            "components": list(map(lambda b: b.to_dict(), components)),
-        }]
+        components2 = _convert_components(components)
     content = str(content) if content is not None else None
     if embed is not None and embeds is not None:
         raise InvalidArgument('cannot pass both embed and embeds parameter to send()')

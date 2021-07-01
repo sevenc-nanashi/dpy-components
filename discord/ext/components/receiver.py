@@ -1,5 +1,5 @@
 from discord.ext import commands
-from .responder import ButtonResponse
+from .responder import ButtonResponse, SelectMenuResponse
 
 
 class ComponentCog(commands.Cog):
@@ -15,9 +15,14 @@ class ComponentCog(commands.Cog):
         data = pl["d"]
         if data["type"] != 3:
             return
-        resp = ButtonResponse(self.bot, data, self.bot._get_state())
-        await resp._fetch()
-        self.bot.dispatch("button_click", resp)
+        if data["data"]["component_type"] == 2:
+            resp = ButtonResponse(self.bot, data, self.bot._get_state())
+            await resp._fetch()
+            self.bot.dispatch("button_click", resp)
+        elif data["data"]["component_type"] == 3:
+            resp = SelectMenuResponse(self.bot, data, self.bot._get_state())
+            await resp._fetch()
+            self.bot.dispatch("menu_select", resp)
 
 
 def setup(_bot):

@@ -1,8 +1,8 @@
-from .sender import send, edit, reply, Button, ButtonType  # noqa
+from .sender import send, edit, reply, Button, ButtonType, SelectMenu, SelectOption  # noqa
 from .receiver import ComponentCog  # noqa
-from .responder import ButtonResponse  # noqa
+from .responder import ButtonResponse, SelectMenuResponse  # noqa
 
-__version__ = "0.2.5"
+__version__ = "0.3.0"
 
 
 def setup(bot):
