@@ -27,6 +27,8 @@ class ButtonResponse():
             self.member = discord.Member(state=bot._get_state(), guild=self.guild, data=data["member"])
             self.user = None
         self.channel = bot.get_channel(int(data["channel_id"]))
+        if data["message"].get("message_reference") and data["message"]["message_reference"].get("channel_id") is None:
+            data["message"]["message_reference"]["channel_id"] = data["channel_id"]
 
         if data["message"]["flags"] == 64:
             self.message = await self.channel.fetch_message(int(data["message"]["id"]))
