@@ -423,7 +423,7 @@ async def edit(message, **fields):
 async def reply(target, *args, **kwargs):
     """An utility function for replying message."""
     if isinstance(target, commands.Context):
-        reference = target.to_reference()
+        reference = target.message.to_reference()
     else:
         reference = target.to_reference()
     await send(target.channel, *args, reference=reference, **kwargs)
