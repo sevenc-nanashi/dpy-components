@@ -23,13 +23,23 @@ def _convert_style(style):
 
 def _convert_components(components):
     listed_components = []
+    temp_components = []
     for component in components:
         if isinstance(component, list):
-            listed_components.append({"type": 1, "components": component})
+            if temp_components:
+                listed_components.append(temp_components)
+                temp_components = []
+            listed_components.append(component)
+        elif isinstance(component, SelectMenu):
+            if temp_components:
+                listed_components.append(temp_components)
+                temp_components = []
+            listed_components.append([component])
         else:
-            listed_components.append({"type": 1, "components": [component]})
-    for component in listed_components:
-        component["components"] = list(map(lambda c: c.to_dict(), component["components"]))
+            temp_components.append(component)
+    if temp_components:
+        listed_components.append(temp_components)
+    listed_components = list(map(lambda c: {"type": 1, "components": list(map(lambda co: co.to_dict(), c))}, listed_components))
 
     return listed_components
 
@@ -168,7 +178,7 @@ class SelectMenu:
     """
     custom_id: Optional[str]
     options: List[SelectOption]
-    placeholder: Optional[str]
+    placeholder: Optional[str] = None
     min_values: int = 1
     max_values: int = 1
 
