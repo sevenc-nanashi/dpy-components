@@ -426,4 +426,4 @@ async def reply(target, *args, **kwargs):
         reference = target.message.to_reference()
     else:
         reference = target.to_reference()
-    await send(target.channel, *args, reference=reference, **kwargs)
+    return await send(target.channel, *args, reference=reference, **kwargs)
