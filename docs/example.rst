@@ -63,3 +63,50 @@ Authorization button
                 await com.send("You got your member role. Enjoy!")
 
     bot.run(os.getenv("token"))
+
+Pagenation with select menu
+---------------------------
+
+.. code-block:: python
+    
+    import asyncio
+    import os
+
+    import discord
+    from discord.ext import commands
+    from discord.ext import components
+    bot = commands.Bot("c ")
+    bot.load_extension("discord.ext.components")
+    bot.load_extension("jishaku")
+
+    pages = [
+        "Done is better than perfect.\n\n--Mark Zuckerberg",
+        "The best way to predict the future is to invent it.\n\n--Alan Key",
+        "Programs must be written for people to read, and only incidentally for machines to execute.\n\n--Hal Alverson"
+    ]
+
+
+    @bot.event
+    async def on_ready():
+        print('We have logged in as {0.user}'.format(bot))
+
+
+    @bot.command()
+    async def send_page(ctx):
+        options = []
+        for i, _ in enumerate(pages, 1):
+            options.append(components.SelectOption(f"Page {i}", f"pagenation_{i}"))
+        msg = await components.send(ctx, "Use select menu for switch page", components=[
+            components.SelectMenu("pagenation", options, "Select page...")
+        ])
+        try:
+            while True:
+                com = await bot.wait_for("menu_select", check=lambda c: c.message == msg, timeout=30)
+                page = int(com.value.removeprefix("pagenation_"))
+                await com.send(pages[page - 1] + f"\n\n`Page {page}`", hidden=True)
+        except asyncio.TimeoutError:
+            return
+
+
+    bot.run(os.getenv("discord_bot_token"))
+
