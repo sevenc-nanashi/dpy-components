@@ -7,6 +7,7 @@ from discord import File, AllowedMentions
 from discord import utils
 from discord.emoji import Emoji
 from discord.errors import InvalidArgument
+from discord.ext import commands
 from discord.http import Route
 
 
@@ -421,4 +422,8 @@ async def edit(message, **fields):
 
 async def reply(target, *args, **kwargs):
     """An utility function for replying message."""
-    await send(target.channel, *args, reference=target.to_reference(), **kwargs)
+    if isinstance(target, commands.Context):
+        reference = target.to_reference()
+    else:
+        reference = target.to_reference()
+    await send(target.channel, *args, reference=reference, **kwargs)
