@@ -2,7 +2,7 @@ from .sender import send, edit, reply, Button, ButtonType, SelectMenu, SelectOpt
 from .receiver import ComponentCog  # noqa
 from .responder import ButtonResponse, SelectMenuResponse  # noqa
 
-__version__ = "0.4.1"
+__version__ = "0.4.2"
 
 
 def setup(bot):
