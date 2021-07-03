@@ -2,6 +2,7 @@ import discord
 from discord.http import Route
 from .sender import _convert_components
 
+
 class ButtonResponse():
     """
     Represents a button response.
@@ -138,7 +139,7 @@ class ButtonResponse():
                     "embeds": list(map(lambda e: e.to_dict(), embeds)),
                     "allowed_mentions": allowed_mentions,
                     "flags": 64 if hidden else 0,
-                "components": components2
+                    "components": components2
                 }
             })
             self.sent_callback = True
@@ -173,7 +174,8 @@ class SelectMenuResponse():
             self.member = discord.Member(state=bot._get_state(), guild=self.guild, data=data["member"])
             self.user = None
         self.channel = bot.get_channel(int(data["channel_id"]))
-
+        if data["message"].get("message_reference") and data["message"]["message_reference"].get("channel_id") is None:
+            data["message"]["message_reference"]["channel_id"] = data["channel_id"]
         if data["message"]["flags"] == 64:
             self.message = await self.channel.fetch_message(int(data["message"]["id"]))
         else:
