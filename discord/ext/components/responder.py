@@ -32,7 +32,10 @@ class ButtonResponse():
             data["message"]["message_reference"]["channel_id"] = data["channel_id"]
 
         if data["message"]["flags"] == 64:
-            self.message = await self.channel.fetch_message(int(data["message"]["id"]))
+            try:
+                self.message = await self.channel.fetch_message(int(data["message"]["id"]))
+            except discord.errors.NotFound:
+                self.message = discord.PartialMessage(channel=self.channel, id=int(data["message"]["id"]))
         else:
             self.message = discord.Message(state=bot._get_state(), channel=self.channel, data=data["message"])
         self.token = data["token"]
@@ -110,7 +113,7 @@ class ButtonResponse():
             allowed_mentions = state.allowed_mentions and state.allowed_mentions.to_dict()
         if self.sent_callback:
             r = Route('POST', "/webhooks/{application_id}/{interaction_token}", application_id=self.application_id, interaction_token=self.token)
-            await state.http.request(r, json={
+            data = await state.http.request(r, json={
                 "content": content,
                 "tts": tts,
                 "embeds": list(map(lambda e: e.to_dict(), embeds)),
@@ -120,7 +123,7 @@ class ButtonResponse():
             })
         elif self.defered:
             r = Route('PATCH', "/webhooks/{application_id}/{interaction_token}/messages/@original", application_id=self.application_id, interaction_token=self.token)
-            await state.http.request(r, json={
+            data = await state.http.request(r, json={
                 "content": content,
                 "tts": tts,
                 "embeds": list(map(lambda e: e.to_dict(), embeds)),
@@ -131,7 +134,7 @@ class ButtonResponse():
             self.sent_callback = True
         else:
             r = Route('POST', '/interactions/{interaction_id}/{interaction_token}/callback', interaction_id=self.id, interaction_token=self.token)
-            await state.http.request(r, json={
+            data = await state.http.request(r, json={
                 "type": 4,
                 "data": {
                     "content": content,
@@ -144,6 +147,9 @@ class ButtonResponse():
             })
             self.sent_callback = True
         self.defered = True
+        if data:
+            ret = state.create_message(channel=self.channel, data=data)
+            return ret
 
     async def _get_channel(self):
         return self.channel
@@ -177,20 +183,26 @@ class SelectMenuResponse():
         if data["message"].get("message_reference") and data["message"]["message_reference"].get("channel_id") is None:
             data["message"]["message_reference"]["channel_id"] = data["channel_id"]
         if data["message"]["flags"] == 64:
-            self.message = await self.channel.fetch_message(int(data["message"]["id"]))
+            try:
+                self.message = await self.channel.fetch_message(int(data["message"]["id"]))
+            except discord.errors.NotFound:
+                self.message = discord.PartialMessage(channel=self.channel, id=int(data["message"]["id"]))
         else:
             self.message = discord.Message(state=bot._get_state(), channel=self.channel, data=data["message"])
         self.token = data["token"]
         self.custom_id = data["data"]["custom_id"]
         self.name = data["data"]["custom_id"]
-        self.values = data["data"]["values"]
+        self.values = data["data"].get("values", [])
         self.defered = False
         self.sent_callback = False
 
     @property
     def value(self):
-        """Return the first value of ``values``."""
-        return self.values[0]
+        """Return the first value of ``values`` or ``None``."""
+        if self.values:
+            return self.values[0]
+        else:
+            return None
 
     @property
     def fired_by(self):
@@ -256,7 +268,7 @@ class SelectMenuResponse():
             allowed_mentions = state.allowed_mentions and state.allowed_mentions.to_dict()
         if self.sent_callback:
             r = Route('POST', "/webhooks/{application_id}/{interaction_token}", application_id=self.application_id, interaction_token=self.token)
-            await state.http.request(r, json={
+            data = await state.http.request(r, json={
                 "content": content,
                 "tts": tts,
                 "embeds": list(map(lambda e: e.to_dict(), embeds)),
@@ -265,7 +277,7 @@ class SelectMenuResponse():
             })
         elif self.defered:
             r = Route('PATCH', "/webhooks/{application_id}/{interaction_token}/messages/@original", application_id=self.application_id, interaction_token=self.token)
-            await state.http.request(r, json={
+            data = await state.http.request(r, json={
                 "content": content,
                 "tts": tts,
                 "embeds": list(map(lambda e: e.to_dict(), embeds)),
@@ -275,7 +287,7 @@ class SelectMenuResponse():
             self.sent_callback = True
         else:
             r = Route('POST', '/interactions/{interaction_id}/{interaction_token}/callback', interaction_id=self.id, interaction_token=self.token)
-            await state.http.request(r, json={
+            data = await state.http.request(r, json={
                 "type": 4,
                 "data": {
                     "content": content,
@@ -287,6 +299,8 @@ class SelectMenuResponse():
             })
             self.sent_callback = True
         self.defered = True
+        ret = state.create_message(channel=self.channel, data=data)
+        return ret
 
     async def _get_channel(self):
         return self.channel
