@@ -1,6 +1,6 @@
 import discord
 from discord.http import Route
-
+from .sender import _convert_components
 
 class ButtonResponse():
     """
@@ -77,7 +77,7 @@ class ButtonResponse():
         self.defered = True
         await self.bot.http.request(r, json={"type": 6})
 
-    async def send(self, content=None, *, embed=None, embeds=[], allowed_mentions=None, hidden=False, tts=False):
+    async def send(self, content=None, *, embed=None, embeds=[], allowed_mentions=None, hidden=False, tts=False, components=[]):
         """Responds interaction.
 
         Parameters
@@ -89,6 +89,11 @@ class ButtonResponse():
         """
         state = self.state
         content = str(content) if content is not None else None
+        components2 = []
+        if not components:
+            pass
+        else:
+            components2 = _convert_components(components)
         if embed is not None:
             if embeds:
                 raise ValueError("You mustn't specify embed and embeds same time.")
@@ -109,7 +114,8 @@ class ButtonResponse():
                 "tts": tts,
                 "embeds": list(map(lambda e: e.to_dict(), embeds)),
                 "allowed_mentions": allowed_mentions,
-                "flags": 64 if hidden else 0
+                "flags": 64 if hidden else 0,
+                "components": components2
             })
         elif self.defered:
             r = Route('PATCH', "/webhooks/{application_id}/{interaction_token}/messages/@original", application_id=self.application_id, interaction_token=self.token)
@@ -118,7 +124,8 @@ class ButtonResponse():
                 "tts": tts,
                 "embeds": list(map(lambda e: e.to_dict(), embeds)),
                 "allowed_mentions": allowed_mentions,
-                "flags": 64 if hidden else 0
+                "flags": 64 if hidden else 0,
+                "components": components2
             })
             self.sent_callback = True
         else:
@@ -130,7 +137,8 @@ class ButtonResponse():
                     "tts": tts,
                     "embeds": list(map(lambda e: e.to_dict(), embeds)),
                     "allowed_mentions": allowed_mentions,
-                    "flags": 64 if hidden else 0
+                    "flags": 64 if hidden else 0,
+                "components": components2
                 }
             })
             self.sent_callback = True
