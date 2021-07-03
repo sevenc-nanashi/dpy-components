@@ -53,3 +53,43 @@ Components
 
 .. autoclass:: components.SelectOption
    :members:
+
+Styles
+~~~~~~
+
+.. class:: components.ButtonType
+
+   Represents style of button.
+   
+   .. attribute:: primary
+   .. attribute:: primary_cta
+   .. attribute:: blue
+   .. attribute:: blurple
+      
+      Represents style ``1``.
+
+   .. attribute:: secondary
+   .. attribute:: gray
+   .. attribute:: grey
+
+      Represents style ``2``.
+   
+   .. attribute:: success
+   .. attribute:: primary_success
+   .. attribute:: green
+
+      Represents style ``3``.
+
+   .. attribute:: danger
+   .. attribute:: destructive
+   .. attribute:: red
+
+      Represents style ``4``.
+
+   .. attribute:: link
+   .. attribute:: url
+      
+      Represents style ``5``.
+
+   
+      

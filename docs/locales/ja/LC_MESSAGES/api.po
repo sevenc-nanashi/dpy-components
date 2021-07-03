@@ -18,39 +18,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: ../../api.rst:2
+#: api.rst:2
 msgid "API documentation"
 msgstr "APIドキュメント"
 
-#: ../../api.rst:5
+#: api.rst:5
 msgid "Receive components' event"
 msgstr "コンポーネントのイベントを受け取る"
 
-#: ../../api.rst:8
+#: api.rst:8
 msgid ""
 "A cog that receive and handles components' event. You can load this cog "
 "as extension with:"
 msgstr "コンポーネントのイベントを受け取り、ハンドルするコグ。エクステンションとして読み込むには以下のようにして下さい："
 
-#: ../../api.rst:16
+#: api.rst:16
 msgid "events"
 msgstr "イベント"
 
-#: ../../api.rst:20
+#: api.rst:20
 msgid "Fires when user clicked button."
 msgstr "ボタンをクリックしたときに発火するイベント。"
 
-#: ../../api.rst components.responder.ButtonResponse.defer_source
+#: api.rst components.responder.ButtonResponse.defer_source
 #: components.responder.ButtonResponse.defer_update
 #: components.responder.ButtonResponse.send components.sender.send of
 msgid "Parameters"
 msgstr "パラメータ"
 
-#: ../../api.rst:22
+#: api.rst:22
 msgid "A response."
 msgstr "Gatewayからのレスポンス。"
 
-#: ../../api.rst:26
+#: api.rst:26
 msgid "Respond components' event"
 msgstr "コンポーネントのイベントに応答する"
 
@@ -59,30 +59,30 @@ msgid "Represents a button response. Do not initialize this class directly."
 msgstr "ボタンのイベントです。このクラスを直接初期化しないで下さい。"
 
 #: components.responder.ButtonResponse.defer_source:1 of
-#: ../../../discord/ext/components/responder.py:docstring of components.responder.SelectMenuResponse.defer_source:1
+#: components.responder.SelectMenuResponse.defer_source:1
 msgid ""
 "ACK an interaction with DeferredChannelMessageWithSource(5). The user "
 "sees a loading state."
 msgstr "DeferredChannelMessageWithSource(5)で応答します。``○○が考え中...``が表示されます。"
 
-#: ../../../discord/ext/components/responder.py:docstring of components.responder.ButtonResponse.send:3
-#: ../../../discord/ext/components/responder.py:docstring of components.responder.SelectMenuResponse.send:3
-#: ../../../discord/ext/components/responder.py:docstring of components.responder.SelectMenuResponse.defer_source:4
-#: ../../../discord/ext/components/responder.py:docstring of components.responder.SelectMenuResponse.defer_update:4
+#: components.responder.ButtonResponse.send:3
+#: components.responder.SelectMenuResponse.send:3
+#: components.responder.SelectMenuResponse.defer_source:4
+#: components.responder.SelectMenuResponse.defer_update:4
 #: components.responder.ButtonResponse.defer_source:4
 #: components.responder.ButtonResponse.defer_update:4 of
 msgid "Hide interaction response or not."
 msgstr "応答を隠すかどうか。"
 
 #: components.responder.ButtonResponse.defer_update:1 of
-#: ../../../discord/ext/components/responder.py:docstring of components.responder.SelectMenuResponse.defer_update:1
+#: components.responder.SelectMenuResponse.defer_update:1
 msgid ""
 "ACK an interaction with DeferredUpdateMessage(6). The user doesn't see a "
 "loading state."
 msgstr "DeferredUpdateMessage(6)で応答します。``○○が考え中...``は表示されません。"
 
 #: components.responder.ButtonResponse.send:1 of
-#: ../../../discord/ext/components/responder.py:docstring of components.responder.SelectMenuResponse.send:1
+#: components.responder.SelectMenuResponse.send:1
 msgid "Responds interaction."
 msgstr "インタラクションに反応します。"
 
@@ -91,23 +91,23 @@ msgid "Same as ``discord.abc.Messageable.send``."
 msgstr "``discord.abc.Messageable.send``と同じです。"
 
 #: components.responder.ButtonResponse.send:4 of
-#: components/responder.py:docstring of components.responder.SelectMenuResponse.send:4
+#: components.responder.SelectMenuResponse.send:4
 msgid "Hide the message or not."
 msgstr "メッセージを隠すかどうか。"
 
-#: ../../../discord/ext/components/responder.py:docstring of components.ButtonResponse.fired_by:1
+#: components.ButtonResponse.fired_by:1
 
 msgid "Return ``self.member`` or ``self.user``."
 msgstr "``self.member`` または ``self.user`` を返します。"
 
-#: components/responder.py:docstring of components.responder.SelectMenuResponse:1
+#: components.responder.SelectMenuResponse:1
 msgid "Represents a select menu response. Do not initialize this class directly."
 msgstr "ドロップダウンのイベントです。このクラスを直接初期化しないで下さい。"
 
-#: components/responder.py:docstring of components.SelectMenuResponse.value:1
+#: components.SelectMenuResponse.value:1
 msgid "Return the first value of ``values``."
 msgstr "``values``の最初の値を返します。"
-#: ../../api.rst:31
+#: api.rst:31
 msgid "Send messages with components"
 msgstr "メッセージをコンポーネント付きで送信する"
 
@@ -141,3 +141,31 @@ msgstr "戻り値の型"
 msgid "An utility function for replying message."
 msgstr "メッセージへ返信する為の関数。"
 
+
+#: api.rst:58
+msgid "Styles"
+msgstr "スタイル"
+
+#: api.rst:62
+msgid "Represents style of button."
+msgstr "ボタンのスタイルを表します。"
+
+#: api.rst:69
+msgid "Represents style ``1``."
+msgstr "スタイル``1``を表します。"
+
+#: api.rst:75
+msgid "Represents style ``2``."
+msgstr "スタイル``2``を表します。"
+
+#: api.rst:81
+msgid "Represents style ``3``."
+msgstr "スタイル``3``を表します。"
+
+#: api.rst:87
+msgid "Represents style ``4``."
+msgstr "スタイル``4``を表します。"
+
+#: api.rst:92
+msgid "Represents style ``5``."
+msgstr "スタイル``5``を表します。"
