@@ -5,6 +5,16 @@
 This lib adds components support for discord.py.  
 Please note this is beta yet.
 
+Didn't work?
+======
+Try adding:
+```python
+@bot.event
+async def on_socket_raw_receive(event):
+    bot.dispatch("socket_response", json.loads(event))
+```
+
+
 Example
 =====
 
